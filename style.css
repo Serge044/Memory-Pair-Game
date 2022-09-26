@@ -1,3 +1,22 @@
+:root {
+	--gradient: linear-gradient(145deg, #ffbf0060, rgba(255, 4, 255, 0.183), #ff770053);
+  }
+
+body {
+	font-family: basic-sans, sans-serif;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.125em;
+	line-height: 1.6;
+	color: black;
+	background: rgba(221, 221, 221, 0.592);
+	background-size: 350%;
+	background-image: var(--gradient);
+	animation: bg-animation 10s infinite;
+}
+
 .wrapper {
 	display: flex;
 	justify-content: center;
@@ -60,7 +79,9 @@ img:hover {
 }
 
 h1 {
+	position: absolute;
 	text-align: center;
+	top: 20px;
 }
 
 @media screen and (max-width: 842px) {
@@ -78,3 +99,9 @@ h1 {
 		top: 120px;
 	}
 }
+  
+  @keyframes bg-animation {
+	0% {background-position: left}
+	50% {background-position: right}
+	100% {background-position: left}
+  }

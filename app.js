@@ -9,20 +9,20 @@ let timer = function () {
   setInterval(function () {
     // '+' before a line converts str into a number
     S = +S + 1;
-    // If result is less than 10, add '0' to the beginning
+    // if result is less than 10, add '0' to the beginning
     if (S < 10) {
       S = "0" + S;
     }
     if (S == 60) {
       S = "00";
-      // As soon as the seconds == 60, add +1 to the minutes
+      // as soon as the seconds == 60, add +1 to the minutes
       M = +M + 1;
       // If result is less than 10, add '0' to the beginning
       if (M < 10) {
         M = "0" + M;
       }
       if (M == 60) {
-        // As soon as the minutes == 60, add +1 to the hours
+        // as soon as the minutes == 60, add +1 to the hours
         M = "00";
         H = +H + 1;
         if (H < 10) {
@@ -91,14 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const optionOneId = flippedCardsId[0];
     const optionTwoId = flippedCardsId[1];
     if (flippedCards[0] === flippedCards[1]) {
-      if (optionOneId == optionTwoId) {
+      if (optionOneId === optionTwoId) {
         // if clicked on the same card
         cards[optionOneId].setAttribute("src", "images/kottans-black.png");
         cards[optionTwoId].setAttribute("src", "images/kottans-black.png");
-        // alert("You clicked on the same card.");
-        // if found a match
       } else if (flippedCards[0] === flippedCards[1]) {
-        // alert("You found a match!");
+        // if found a match
         cards[optionOneId].setAttribute("src", "images/kottans-white.png");
         cards[optionTwoId].setAttribute("src", "images/kottans-white.png");
         cards[optionOneId].removeEventListener("click", flipcard);
@@ -109,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // if not match
       cards[optionOneId].setAttribute("src", "images/kottans-black.png");
       cards[optionTwoId].setAttribute("src", "images/kottans-black.png");
-      // alert("Try again.");
     }
     flippedCards = [];
     flippedCardsId = [];
