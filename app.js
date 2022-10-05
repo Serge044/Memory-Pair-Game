@@ -1,41 +1,3 @@
-let timer = function () {
-  const hour = document.getElementById("hour");
-  const mins = document.getElementById("mins");
-  const secs = document.getElementById("secs");
-  let S = "00",
-    M = "00",
-    H = "00";
-
-  setInterval(function () {
-    // '+' before a line converts str into a number
-    S = +S + 1;
-    // if result is less than 10, add '0' to the beginning
-    if (S < 10) {
-      S = "0" + S;
-    }
-    if (S == 60) {
-      S = "00";
-      // as soon as the seconds == 60, add +1 to the minutes
-      M = +M + 1;
-      // If result is less than 10, add '0' to the beginning
-      if (M < 10) {
-        M = "0" + M;
-      }
-      if (M == 60) {
-        // as soon as the minutes == 60, add +1 to the hours
-        M = "00";
-        H = +H + 1;
-        if (H < 10) {
-          H = "0" + H;
-        }
-      }
-    }
-    secs.innerText = S;
-    mins.innerText = M;
-    hour.innerText = H;
-  }, 1000);
-};
-
 document.addEventListener("DOMContentLoaded", () => {
   const cardsArr = [
     {
@@ -111,19 +73,32 @@ document.addEventListener("DOMContentLoaded", () => {
     flippedCards = [];
     flippedCardsId = [];
     if (cardsWon.length === doubleCardsArr.length / 2) {
-      setTimeout(() => {
-        let t = document.querySelector(".time");
-        alert(`You found all pairs! Your ${t.innerText.toLocaleLowerCase()}`);
-        setTimeout(window.location.reload.bind(window.location), 250);
-      }, 550);
+      pauseWatch();
+      let timeOfGame = document.querySelector(".watch");
+      function playAgain() {
+        let result = "";
+        result = `
+        <div class="new_game_div">
+        <h2>You win! <br> Your time: ${timeOfGame.innerText}</h2>
+        <div class="div_with_btn"><button class="btn_new-game" id="btn_new-game">Play again</button></div>
+        </div> `;
+        document.getElementById("wrapper").innerHTML = result;
+
+        document
+          .getElementById("btn_new-game")
+          .addEventListener("click", playAgain);
+
+        function playAgain() {
+          // check setTimeout
+          setTimeout(window.location.reload.bind(window.location), 3);
+        }
+      }
+      playAgain();
     }
   }
 
   function flipcard() {
-    let k = document.querySelector(".time");
-    if (k.innerText === "Time: 00:00:00") {
-      timer();
-    }
+    startWatch();
     let cardId = this.getAttribute("card-id");
     flippedCards.push(doubleCardsArr[cardId].name);
     flippedCardsId.push(cardId);
@@ -135,3 +110,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   newGame();
 });
+
+// ------------------------------------------------------------------------
+
+// stopwatch
+
+const watch = document.querySelector("#watch");
+let milliseconds = 0;
+let timer;
+
+const startWatch = () => {
+  watch.classList.remove("paused");
+  clearInterval(timer);
+  timer = setInterval(() => {
+    milliseconds += 10;
+    let dateTimer = new Date(milliseconds);
+    watch.innerHTML =
+      ("0" + dateTimer.getUTCHours()).slice(-2) +
+      ":" +
+      ("0" + dateTimer.getUTCMinutes()).slice(-2) +
+      ":" +
+      ("0" + dateTimer.getUTCSeconds()).slice(-2) +
+      ":" +
+      ("0" + dateTimer.getUTCMilliseconds()).slice(-3, -1);
+  }, 10);
+};
+
+const pauseWatch = () => {
+  watch.classList.add("paused");
+  clearInterval(timer);
+};
+
+const resetWatch = () => {
+  watch.classList.remove("paused");
+  clearInterval(timer);
+  milliseconds = 0;
+  watch.innerHTML = "00:00:00:00";
+};
