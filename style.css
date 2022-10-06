@@ -2,6 +2,8 @@
 	--gradient: linear-gradient(145deg, #ffbf0060, rgba(255, 4, 255, 0.183), #ff770053);
   }
 
+  /* img { pointer-events: none; } */
+
 body {
 	font-family: basic-sans, sans-serif;
 	min-height: 100vh;
@@ -15,12 +17,16 @@ body {
 	background-size: 350%;
 	background-image: var(--gradient);
 	animation: bg-animation 10s infinite;
+	user-select: none;
 }
 
 .wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	/* check width & heigth */
+	width: 300px;
+	height: 400px;
 }
 
 .field {
