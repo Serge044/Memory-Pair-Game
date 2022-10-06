@@ -99,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function flipcard() {
     startWatch();
+    const anim = document.getElementById("time");
+    anim.classList.add("time-animation");
     let cardId = this.getAttribute("card-id");
     flippedCards.push(doubleCardsArr[cardId].name);
     flippedCardsId.push(cardId);
