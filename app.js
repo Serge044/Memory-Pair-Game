@@ -33,6 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return 0.5 - Math.random();
   });
 
+  // disable click
+  function disableClick() {
+    const click = document.getElementById("wrapper");
+    click.classList.add("disable-click");
+  }
+
+  // make click great again
+  function ableClick() {
+    const click = document.getElementById("wrapper");
+    click.classList.remove("disable-click");
+  }
+
+  // const disableClick = document.getElementById("wrapper");
+  // anim.classList.add("time-animation");
+
   const field = document.querySelector(".field");
   let flippedCards = [];
   let flippedCardsId = [];
@@ -103,11 +118,27 @@ document.addEventListener("DOMContentLoaded", () => {
     anim.classList.add("time-animation");
     let cardId = this.getAttribute("card-id");
     flippedCards.push(doubleCardsArr[cardId].name);
+
+    if (flippedCards.length === 2) {
+      disableClick();
+      setTimeout(ableClick, 500);
+    }
+
     flippedCardsId.push(cardId);
     this.setAttribute("src", doubleCardsArr[cardId].img);
+    // console.log(flippedCards.length);
+
+    // if (flippedCards.length === 1) {
+    //   disableClick();
+    // }
+
+    // setTimeout(ableClick, 1000);
+
     if (flippedCards.length === 2) {
       setTimeout(checkForEquality, 500);
     }
+
+    // setTimeout(ableClick, 500);
   }
 
   newGame();

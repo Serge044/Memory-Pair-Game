@@ -4,6 +4,12 @@
 
   /* img { pointer-events: none; } */
 
+  /* disable click */
+
+.disable-click {
+	pointer-events: none;
+}
+
 body {
 	font-family: basic-sans, sans-serif;
 	/* min-height: 100vh; */
