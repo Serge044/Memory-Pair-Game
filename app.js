@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
       let card = document.createElement("img");
       card.setAttribute("src", "images/kottans-black.png");
       card.setAttribute("card-id", i);
+      // forbidden to pull the cards
+      card.setAttribute("draggable", "false");
       card.addEventListener("click", flipcard);
       field.appendChild(card);
     }
